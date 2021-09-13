@@ -2,6 +2,7 @@
   "name": "jsonify-craft",
   "version": "0.1.0",
   "main": "public/electron.js",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "bootstrap": "^5.1.0",
