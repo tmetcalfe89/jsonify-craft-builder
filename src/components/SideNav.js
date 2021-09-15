@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { ListGroup, Row, Col, Button } from 'react-bootstrap'
 import { CaretDownFill, CaretRightFill, PlusCircle, PlusCircleFill, Trash } from 'react-bootstrap-icons'
-import GroupMaker from './GroupMaker';
-import ItemMaker from './ItemMaker';
+import GroupPopup from './GroupPopup';
+import EntryPopup from './EntryPopup';
 
 function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, createItem, deleteItem }) {
   const [showGroup, setShowGroup] = useState(groups.map(e => false));
@@ -18,13 +18,13 @@ function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, cre
     updateActiveItem(i);
   }
 
-  const [displayGroupMaker, setDisplayGroupMaker] = useState(false);
-  const showGroupMaker = () => setDisplayGroupMaker(true);
-  const hideGroupMaker = () => setDisplayGroupMaker(false);
+  const [displayGroupPopup, setDisplayGroupPopup] = useState(false);
+  const showGroupPopup = () => setDisplayGroupPopup(true);
+  const hideGroupPopup = () => setDisplayGroupPopup(false);
 
-  const [displayItemMaker, setDisplayItemMaker] = useState(false);
-  const showItemMaker = () => setDisplayItemMaker(true);
-  const hideItemMaker = () => setDisplayItemMaker(false);
+  const [displayEntryPopup, setDisplayEntryPopup] = useState(false);
+  const showEntryPopup = () => setDisplayEntryPopup(true);
+  const hideEntryPopup = () => setDisplayEntryPopup(false);
 
   const [addingGroup, setAddingGroup] = useState(0);
   const addItem = (name, type) => {
@@ -63,7 +63,7 @@ function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, cre
                 )}
                 {showGroup[g] && <ListGroup.Item action className="d-grid gap-2" as="div" onClick={() => {
                   setAddingGroup(g);
-                  showItemMaker();
+                  showEntryPopup();
                 }}>
                   <Button variant="secondary">
                     <PlusCircle />
@@ -76,13 +76,13 @@ function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, cre
       </Row>
       <Row style={{ paddingBottom: "0.5rem" }}>
         <Col className="d-grid gap-2">
-          <Button variant="primary" onClick={showGroupMaker}>
+          <Button variant="primary" onClick={showGroupPopup}>
             <PlusCircleFill />
           </Button>
         </Col>
       </Row>
-      <GroupMaker shown={displayGroupMaker} hide={hideGroupMaker} save={createGroup} />
-      <ItemMaker shown={displayItemMaker} hide={hideItemMaker} save={addItem} />
+      <GroupPopup shown={displayGroupPopup} hide={hideGroupPopup} save={createGroup} />
+      <EntryPopup shown={displayEntryPopup} hide={hideEntryPopup} save={addItem} />
     </>
   )
 }

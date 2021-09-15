@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import SideNav from "./components/SideNav";
-import EntryMaker from "./components/EntryMaker";
+import EntryDesigner from "./components/EntryDesigner";
 
 function App() {
   const [groups, setGroups] = useState([]);
@@ -32,7 +32,7 @@ function App() {
           <SideNav groups={groups} updateActiveGroup={setActiveGroupIndex} updateActiveItem={setActiveItemIndex} createGroup={createGroup} createItem={createItem} deleteItem={deleteItem} />
         </Col>
         <Col>
-          <EntryMaker entry={groups[activeGroupIndex]?.items[activeItemIndex]} />
+          <EntryDesigner entry={groups[activeGroupIndex]?.items[activeItemIndex]} />
         </Col>
       </Row>
     </Container>
