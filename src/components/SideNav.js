@@ -5,7 +5,7 @@ import GroupPopup from './GroupPopup';
 import EntryPopup from './EntryPopup';
 import GroupLine from "./SideNav/GroupLine";
 
-function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, createItem, deleteItem }) {
+function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, createItem, deleteItem, deleteGroup }) {
 
   const updateActiveItemIndex = (g, i) => {
     updateActiveGroup(g);
@@ -27,10 +27,6 @@ function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, cre
 
   const deleteEntry = (g, i) => {
     deleteItem(g, i);
-  }
-
-  const deleteGroup = (e, g) => {
-    e.stopPropagation();
   }
 
   return (
