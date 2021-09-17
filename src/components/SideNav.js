@@ -1,17 +1,11 @@
 import React, { useState } from 'react'
 import { ListGroup, Row, Col, Button } from 'react-bootstrap'
-import { CaretDownFill, CaretRightFill, PlusCircle, PlusCircleFill, Trash } from 'react-bootstrap-icons'
+import { PlusCircleFill } from 'react-bootstrap-icons'
 import GroupPopup from './GroupPopup';
 import EntryPopup from './EntryPopup';
+import GroupLine from "./SideNav/GroupLine";
 
 function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, createItem, deleteItem }) {
-  const [showGroup, setShowGroup] = useState(groups.map(e => false));
-
-  const updateShowGroup = (i) => {
-    const showGroupTemp = [...showGroup];
-    showGroupTemp[i] = !showGroupTemp[i];
-    setShowGroup(showGroupTemp);
-  }
 
   const updateActiveItemIndex = (g, i) => {
     updateActiveGroup(g);
@@ -30,11 +24,13 @@ function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, cre
   const addItem = (name, type) => {
     createItem(addingGroup, name, type);
   }
-  
-  const deleteEntry = (e, g, i) => {
-    console.log(e);
-    e.stopPropagation();
+
+  const deleteEntry = (g, i) => {
     deleteItem(g, i);
+  }
+
+  const deleteGroup = (e, g) => {
+    e.stopPropagation();
   }
 
   return (
@@ -49,26 +45,7 @@ function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, cre
           <ListGroup variant="flush">
             {groups.map((group, g) => (
               <>
-                <ListGroup.Item action variant={showGroup[g] ? "dark" : ""} onClick={() => updateShowGroup(g)} key={`sidenav-group-${g}`} style={{ display: "flex", alignItems: "center" }}>
-                  {showGroup[g] ? <CaretDownFill style={{ marginRight: "0.6rem" }} /> : <CaretRightFill style={{ marginRight: "0.6rem" }} />}
-                  {group.name}
-                </ListGroup.Item>
-                {showGroup[g] && group.items.map((item, i) =>
-                  <ListGroup.Item action as="div" onClick={() => updateActiveItemIndex(g, i)} key={`sidenav-item-${g}-${i}`} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    {item.name}
-                    <Button variant="secondary" style={{ display: "flex", alignItems: "center", padding: "0.5rem" }} onClick={(e) => deleteEntry(e, g, i)}>
-                      <Trash />
-                    </Button>
-                  </ListGroup.Item>
-                )}
-                {showGroup[g] && <ListGroup.Item action className="d-grid gap-2" as="div" onClick={() => {
-                  setAddingGroup(g);
-                  showEntryPopup();
-                }}>
-                  <Button variant="secondary">
-                    <PlusCircle />
-                  </Button>
-                </ListGroup.Item>}
+                <GroupLine g={g} group={group} deleteGroup={deleteGroup} updateActiveItemIndex={updateActiveItemIndex} deleteEntry={deleteEntry} setAddingGroup={setAddingGroup} showEntryPopup={showEntryPopup} />
               </>
             ))}
           </ListGroup>
