@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Modal, Button, Form } from "react-bootstrap"
 
-function ItemMaker({ shown, hide, save, types = ["item", "block"] }) {
+function EntryPopup({ shown, hide, save, types = ["item", "block"] }) {
   const [name, setName] = useState("");
   const [type, setType] = useState("invalid");
   const ref = useRef()
@@ -48,4 +48,4 @@ function ItemMaker({ shown, hide, save, types = ["item", "block"] }) {
   )
 }
 
-export default ItemMaker
+export default EntryPopup
