@@ -44,9 +44,7 @@ function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, cre
         <Col>
           <ListGroup variant="flush">
             {groups.map((group, g) => (
-              <>
-                <GroupLine g={g} group={group} deleteGroup={deleteGroup} updateActiveItemIndex={updateActiveItemIndex} deleteEntry={deleteEntry} setAddingGroup={setAddingGroup} showEntryPopup={showEntryPopup} />
-              </>
+              <GroupLine key={`sidenav-group-${g}`} g={g} group={group} deleteGroup={deleteGroup} updateActiveItemIndex={updateActiveItemIndex} deleteEntry={deleteEntry} setAddingGroup={setAddingGroup} showEntryPopup={showEntryPopup} />
             ))}
           </ListGroup>
         </Col>

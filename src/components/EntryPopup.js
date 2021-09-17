@@ -35,7 +35,7 @@ function EntryPopup({ shown, hide, save, types = ["item", "block"] }) {
           <Form.Group>
             <Form.Select value={type} onChange={(e) => setType(e.target.value)}>
               <option value="invalid">Type</option>
-              {types.map(type => <option value={type}>{type}</option>)}
+              {types.map((type, ti) => <option value={type} key={`type-option-${ti}`}>{type}</option>)}
             </Form.Select>
           </Form.Group>
         </Form>

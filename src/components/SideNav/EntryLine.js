@@ -13,7 +13,7 @@ function EntryLine({ g, i, name, deleteEntry, updateActiveItemIndex }) {
   }
 
   return (
-    <ListGroup.Item action as="div" onClick={selectMe} key={`sidenav-item-${g}-${i}`} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <ListGroup.Item action as="div" onClick={selectMe} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       {name}
       <DeleteButton variant="secondary" onClick={deleteMe} />
     </ListGroup.Item>

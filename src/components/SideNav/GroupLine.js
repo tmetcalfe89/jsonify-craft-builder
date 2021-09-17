@@ -9,13 +9,13 @@ function GroupLine({ g, group, deleteGroup, deleteEntry, updateActiveItemIndex, 
 
   return (
     <>
-      <ListGroup.Item action variant={showEntries ? "dark" : ""} onClick={() => setShowEntries(!showEntries)} key={`sidenav-group-${g}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <ListGroup.Item action as="div" variant={showEntries ? "dark" : ""} onClick={() => setShowEntries(!showEntries)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         {showEntries ? <CaretDownFill style={{ marginRight: "0.6rem" }} /> : <CaretRightFill style={{ marginRight: "0.6rem" }} />}
         {group.name}
         <DeleteButton variant="secondary" onClick={(e) => deleteGroup(e, g)} />
       </ListGroup.Item>
       {showEntries && group.items.map((item, i) =>
-        <EntryLine g={g} i={i} name={item.name} deleteEntry={deleteEntry} updateActiveItemIndex={updateActiveItemIndex} />
+        <EntryLine key={`sidenav-item-${g}-${i}`} g={g} i={i} name={item.name} deleteEntry={deleteEntry} updateActiveItemIndex={updateActiveItemIndex} />
       )}
       {showEntries && <ListGroup.Item action className="d-grid gap-2" as="div" onClick={() => {
         setAddingGroup(g);
