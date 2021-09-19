@@ -1,39 +1,31 @@
 import React, { useState } from 'react'
 import { ListGroup, Row, Col, Button } from 'react-bootstrap'
-import { CaretDownFill, CaretRightFill, PlusCircle, PlusCircleFill, Trash } from 'react-bootstrap-icons'
-import GroupMaker from './GroupMaker';
-import ItemMaker from './ItemMaker';
+import { PlusCircleFill } from 'react-bootstrap-icons'
+import GroupPopup from './GroupPopup';
+import EntryPopup from './EntryPopup';
+import GroupLine from "./SideNav/GroupLine";
 
-function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, createItem, deleteItem }) {
-  const [showGroup, setShowGroup] = useState(groups.map(e => false));
-
-  const updateShowGroup = (i) => {
-    const showGroupTemp = [...showGroup];
-    showGroupTemp[i] = !showGroupTemp[i];
-    setShowGroup(showGroupTemp);
-  }
+function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, createItem, deleteItem, deleteGroup }) {
 
   const updateActiveItemIndex = (g, i) => {
     updateActiveGroup(g);
     updateActiveItem(i);
   }
 
-  const [displayGroupMaker, setDisplayGroupMaker] = useState(false);
-  const showGroupMaker = () => setDisplayGroupMaker(true);
-  const hideGroupMaker = () => setDisplayGroupMaker(false);
+  const [displayGroupPopup, setDisplayGroupPopup] = useState(false);
+  const showGroupPopup = () => setDisplayGroupPopup(true);
+  const hideGroupPopup = () => setDisplayGroupPopup(false);
 
-  const [displayItemMaker, setDisplayItemMaker] = useState(false);
-  const showItemMaker = () => setDisplayItemMaker(true);
-  const hideItemMaker = () => setDisplayItemMaker(false);
+  const [displayEntryPopup, setDisplayEntryPopup] = useState(false);
+  const showEntryPopup = () => setDisplayEntryPopup(true);
+  const hideEntryPopup = () => setDisplayEntryPopup(false);
 
   const [addingGroup, setAddingGroup] = useState(0);
   const addItem = (name, type) => {
     createItem(addingGroup, name, type);
   }
-  
-  const deleteEntry = (e, g, i) => {
-    console.log(e);
-    e.stopPropagation();
+
+  const deleteEntry = (g, i) => {
     deleteItem(g, i);
   }
 
@@ -48,41 +40,20 @@ function SideNav({ groups, updateActiveGroup, updateActiveItem, createGroup, cre
         <Col>
           <ListGroup variant="flush">
             {groups.map((group, g) => (
-              <>
-                <ListGroup.Item action variant={showGroup[g] ? "dark" : ""} onClick={() => updateShowGroup(g)} key={`sidenav-group-${g}`} style={{ display: "flex", alignItems: "center" }}>
-                  {showGroup[g] ? <CaretDownFill style={{ marginRight: "0.6rem" }} /> : <CaretRightFill style={{ marginRight: "0.6rem" }} />}
-                  {group.name}
-                </ListGroup.Item>
-                {showGroup[g] && group.items.map((item, i) =>
-                  <ListGroup.Item action as="div" onClick={() => updateActiveItemIndex(g, i)} key={`sidenav-item-${g}-${i}`} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    {item.name}
-                    <Button variant="secondary" style={{ display: "flex", alignItems: "center", padding: "0.5rem" }} onClick={(e) => deleteEntry(e, g, i)}>
-                      <Trash />
-                    </Button>
-                  </ListGroup.Item>
-                )}
-                {showGroup[g] && <ListGroup.Item action className="d-grid gap-2" as="div" onClick={() => {
-                  setAddingGroup(g);
-                  showItemMaker();
-                }}>
-                  <Button variant="secondary">
-                    <PlusCircle />
-                  </Button>
-                </ListGroup.Item>}
-              </>
+              <GroupLine key={`sidenav-group-${g}`} g={g} group={group} deleteGroup={deleteGroup} updateActiveItemIndex={updateActiveItemIndex} deleteEntry={deleteEntry} setAddingGroup={setAddingGroup} showEntryPopup={showEntryPopup} />
             ))}
           </ListGroup>
         </Col>
       </Row>
       <Row style={{ paddingBottom: "0.5rem" }}>
         <Col className="d-grid gap-2">
-          <Button variant="primary" onClick={showGroupMaker}>
+          <Button variant="primary" onClick={showGroupPopup}>
             <PlusCircleFill />
           </Button>
         </Col>
       </Row>
-      <GroupMaker shown={displayGroupMaker} hide={hideGroupMaker} save={createGroup} />
-      <ItemMaker shown={displayItemMaker} hide={hideItemMaker} save={addItem} />
+      <GroupPopup shown={displayGroupPopup} hide={hideGroupPopup} save={createGroup} />
+      <EntryPopup shown={displayEntryPopup} hide={hideEntryPopup} save={addItem} />
     </>
   )
 }

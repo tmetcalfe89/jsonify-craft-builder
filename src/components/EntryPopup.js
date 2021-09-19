@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Modal, Button, Form } from "react-bootstrap"
 
-function ItemMaker({ shown, hide, save, types = ["item", "block"] }) {
+function EntryPopup({ shown, hide, save, types = ["item", "block"] }) {
   const [name, setName] = useState("");
   const [type, setType] = useState("invalid");
   const ref = useRef()
@@ -35,7 +35,7 @@ function ItemMaker({ shown, hide, save, types = ["item", "block"] }) {
           <Form.Group>
             <Form.Select value={type} onChange={(e) => setType(e.target.value)}>
               <option value="invalid">Type</option>
-              {types.map(type => <option value={type}>{type}</option>)}
+              {types.map((type, ti) => <option value={type} key={`type-option-${ti}`}>{type}</option>)}
             </Form.Select>
           </Form.Group>
         </Form>
@@ -48,4 +48,4 @@ function ItemMaker({ shown, hide, save, types = ["item", "block"] }) {
   )
 }
 
-export default ItemMaker
+export default EntryPopup

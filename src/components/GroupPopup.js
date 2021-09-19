@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Modal, Button, Form } from "react-bootstrap"
 
-function GroupMaker({ shown, hide, save }) {
+function GroupPopup({ shown, hide, save }) {
   const [name, setName] = useState("");
   const ref = useRef();
 
@@ -35,4 +35,4 @@ function GroupMaker({ shown, hide, save }) {
   )
 }
 
-export default GroupMaker
+export default GroupPopup
