@@ -1,6 +1,6 @@
 import React from 'react'
 
-function EntryMaker({ entry: {type} = {} }) {
+function EntryMaker ({ entry: { type } = {} }) {
   return (
     <div>
       {type}

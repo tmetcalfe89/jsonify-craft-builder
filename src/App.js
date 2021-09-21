@@ -1,24 +1,24 @@
-import { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import SideNav from "./components/SideNav";
-import EntryDesigner from "./components/EntryDesigner";
+import { useState } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import SideNav from './components/SideNav'
+import EntryDesigner from './components/EntryDesigner'
 
-function App() {
-  const [groups, setGroups] = useState([]);
-  const [activeGroupIndex, setActiveGroupIndex] = useState(0);
-  const [activeItemIndex, setActiveItemIndex] = useState(0);
+function App () {
+  const [groups, setGroups] = useState([])
+  const [activeGroupIndex, setActiveGroupIndex] = useState(0)
+  const [activeItemIndex, setActiveItemIndex] = useState(0)
 
   const createGroup = (name) => {
     setGroups([...groups, { name, items: [] }])
   }
 
   const createItem = (g, name, type) => {
-    const groupsTemp = [...groups];
+    const groupsTemp = [...groups]
     groupsTemp[g].items.push({
       type,
       name
-    });
-    setGroups(groupsTemp);
+    })
+    setGroups(groupsTemp)
   }
 
   const deleteItem = (g, i) => {
@@ -26,13 +26,13 @@ function App() {
   }
 
   const deleteGroup = (g) => {
-    setGroups(groups.filter((group, gg) => gg !== g));
+    setGroups(groups.filter((group, gg) => gg !== g))
   }
 
   return (
-    <Container fluid style={{ height: "100vh", overflowY: "hidden" }}>
+    <Container fluid style={{ height: '100vh', overflowY: 'hidden' }}>
       <Row>
-        <Col sm="3" style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+        <Col sm='3' style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
           <SideNav groups={groups} updateActiveGroup={setActiveGroupIndex} updateActiveItem={setActiveItemIndex} createGroup={createGroup} createItem={createItem} deleteItem={deleteItem} deleteGroup={deleteGroup} />
         </Col>
         <Col>
@@ -43,4 +43,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
