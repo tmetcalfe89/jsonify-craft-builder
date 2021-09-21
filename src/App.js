@@ -4,7 +4,7 @@ import SideNav from './components/SideNav'
 import EntryDesigner from './components/EntryDesigner'
 import ConfirmPopup from './components/ConfirmPopup'
 
-function App() {
+function App () {
   const [groups, setGroups] = useState([])
   const [activeGroupIndex, setActiveGroupIndex] = useState(0)
   const [activeItemIndex, setActiveItemIndex] = useState(0)

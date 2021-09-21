@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 
-function ConfirmPopup({ shown, hide, confirm }) {
+function ConfirmPopup ({ shown, hide, confirm }) {
   const confirmMe = () => {
     hide()
     confirm()
