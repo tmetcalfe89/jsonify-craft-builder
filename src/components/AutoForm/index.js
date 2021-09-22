@@ -1,6 +1,5 @@
 import React from 'react'
 import FieldTypes from './FieldTypes'
-import { Button } from 'react-bootstrap'
 
 function AutoForm ({ description = {}, data = {}, setData = () => {} }) {
   const updateField = (key, value) => {
@@ -17,6 +16,7 @@ function AutoForm ({ description = {}, data = {}, setData = () => {} }) {
         description={fieldDescription}
         value={data[id]}
         updateValue={value => updateField(id, value)}
+        key={`field-element-${id}`}
       />
     )
   })
