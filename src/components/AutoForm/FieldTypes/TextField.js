@@ -1,9 +1,13 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 
-function TextField ({ description: { label, note }, value, updateValue }) {
+function TextField ({
+  description: { label, note, process },
+  value,
+  updateValue
+}) {
   const updateMe = e => {
-    updateValue(e.target.value)
+    updateValue(process(e.target.value))
   }
 
   return (
