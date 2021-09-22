@@ -18,7 +18,7 @@ const formTypes = {
   }
 }
 
-function EntryDesigner ({ entry, updateEntry }) {
+function EntryDesigner ({ entry = {}, updateEntry }) {
   return (
     <AutoForm
       description={formTypes[entry.type]}
