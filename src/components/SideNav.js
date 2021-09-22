@@ -5,7 +5,15 @@ import GroupPopup from './GroupPopup'
 import EntryPopup from './EntryPopup'
 import GroupLine from './SideNav/GroupLine'
 
-function SideNav ({ groups, updateActiveGroup, updateActiveItem, createGroup, createItem, deleteItem, deleteGroup }) {
+function SideNav ({
+  groups,
+  updateActiveGroup,
+  updateActiveItem,
+  createGroup,
+  createItem,
+  deleteItem,
+  deleteGroup
+}) {
   const updateActiveItemIndex = (g, i) => {
     updateActiveGroup(g)
     updateActiveItem(i)
@@ -39,7 +47,16 @@ function SideNav ({ groups, updateActiveGroup, updateActiveItem, createGroup, cr
         <Col>
           <ListGroup variant='flush'>
             {groups.map((group, g) => (
-              <GroupLine key={`sidenav-group-${g}`} g={g} group={group} deleteGroup={deleteGroup} updateActiveItemIndex={updateActiveItemIndex} deleteEntry={deleteEntry} setAddingGroup={setAddingGroup} showEntryPopup={showEntryPopup} />
+              <GroupLine
+                key={`sidenav-group-${g}`}
+                g={g}
+                group={group}
+                deleteGroup={deleteGroup}
+                updateActiveItemIndex={updateActiveItemIndex}
+                deleteEntry={deleteEntry}
+                setAddingGroup={setAddingGroup}
+                showEntryPopup={showEntryPopup}
+              />
             ))}
           </ListGroup>
         </Col>
@@ -51,8 +68,16 @@ function SideNav ({ groups, updateActiveGroup, updateActiveItem, createGroup, cr
           </Button>
         </Col>
       </Row>
-      <GroupPopup shown={displayGroupPopup} hide={hideGroupPopup} save={createGroup} />
-      <EntryPopup shown={displayEntryPopup} hide={hideEntryPopup} save={addItem} />
+      <GroupPopup
+        shown={displayGroupPopup}
+        hide={hideGroupPopup}
+        save={createGroup}
+      />
+      <EntryPopup
+        shown={displayEntryPopup}
+        hide={hideEntryPopup}
+        save={addItem}
+      />
     </>
   )
 }
