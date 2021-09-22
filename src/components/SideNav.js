@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { ListGroup, Row, Col, Button } from 'react-bootstrap'
 import { PlusCircleFill } from 'react-bootstrap-icons'
-import GroupPopup from './GroupPopup'
-import EntryPopup from './EntryPopup'
+import GroupPopup from './SideNav/GroupPopup'
+import EntryPopup from './SideNav/EntryPopup'
 import GroupLine from './SideNav/GroupLine'
 
 function SideNav ({
