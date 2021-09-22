@@ -10,14 +10,14 @@ function App () {
   const [activeItemIndex, setActiveItemIndex] = useState(0)
 
   const [showConfirm, setShowConfirm] = useState(false)
-  const [confirmCallback, setConfirmCallback] = useState(() => { })
-  const displayConfirm = (cb) => {
+  const [confirmCallback, setConfirmCallback] = useState(() => {})
+  const displayConfirm = cb => {
     setShowConfirm(true)
     setConfirmCallback(() => cb)
   }
   const hideConfirm = () => setShowConfirm(false)
 
-  const createGroup = (name) => {
+  const createGroup = name => {
     setGroups([...groups, { name, items: [] }])
   }
 
@@ -31,28 +31,70 @@ function App () {
   }
 
   const deleteItem = (g, i) => {
-    const actuallyDeleteItem = () => setGroups(groups.map((group, gg) => ({ ...group, items: group.items.filter((item, ii) => !(i === ii && g === gg)) })))
+    const actuallyDeleteItem = () =>
+      setGroups(
+        groups.map((group, gg) => ({
+          ...group,
+          items: group.items.filter((item, ii) => !(i === ii && g === gg))
+        }))
+      )
     displayConfirm(actuallyDeleteItem)
   }
 
-  const deleteGroup = (g) => {
-    const actuallyDeleteGroup = () => setGroups(groups.filter((group, gg) => gg !== g))
+  const deleteGroup = g => {
+    const actuallyDeleteGroup = () =>
+      setGroups(groups.filter((group, gg) => gg !== g))
     displayConfirm(actuallyDeleteGroup)
+  }
+
+  const updateEntry = entryData => {
+    setGroups(
+      groups.map((group, gg) => ({
+        ...group,
+        items: group.items.map((item, ii) =>
+          !(activeItemIndex === ii && activeGroupIndex === gg)
+            ? item
+            : entryData
+        )
+      }))
+    )
   }
 
   return (
     <>
       <Container fluid style={{ height: '100vh', overflowY: 'hidden' }}>
         <Row>
-          <Col sm='3' style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-            <SideNav groups={groups} updateActiveGroup={setActiveGroupIndex} updateActiveItem={setActiveItemIndex} createGroup={createGroup} createItem={createItem} deleteItem={deleteItem} deleteGroup={deleteGroup} />
+          <Col
+            sm='3'
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100vh'
+            }}
+          >
+            <SideNav
+              groups={groups}
+              updateActiveGroup={setActiveGroupIndex}
+              updateActiveItem={setActiveItemIndex}
+              createGroup={createGroup}
+              createItem={createItem}
+              deleteItem={deleteItem}
+              deleteGroup={deleteGroup}
+            />
           </Col>
           <Col>
-            <EntryDesigner entry={groups[activeGroupIndex]?.items[activeItemIndex]} />
+            <EntryDesigner
+              entry={groups[activeGroupIndex]?.items[activeItemIndex]}
+              updateEntry={updateEntry}
+            />
           </Col>
         </Row>
       </Container>
-      <ConfirmPopup shown={showConfirm} hide={hideConfirm} confirm={confirmCallback} />
+      <ConfirmPopup
+        shown={showConfirm}
+        hide={hideConfirm}
+        confirm={confirmCallback}
+      />
     </>
   )
 }

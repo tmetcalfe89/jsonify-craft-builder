@@ -1,11 +1,31 @@
 import React from 'react'
+import AutoForm from './AutoForm'
 
-function EntryMaker ({ entry: { type } = {} }) {
+const formTypes = {
+  item: {
+    name: {
+      type: 'text',
+      label: 'Item Name',
+      note: 'This will automatically be converted to snake_case'
+    }
+  },
+  block: {
+    name: {
+      type: 'text',
+      label: 'Block Name',
+      note: 'This will automatically be converted to snake_case'
+    }
+  }
+}
+
+function EntryDesigner ({ entry, updateEntry }) {
   return (
-    <div>
-      {type}
-    </div>
+    <AutoForm
+      description={formTypes[entry.type]}
+      data={entry}
+      setData={updateEntry}
+    />
   )
 }
 
-export default EntryMaker
+export default EntryDesigner
