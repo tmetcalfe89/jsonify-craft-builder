@@ -2,7 +2,7 @@ import React from 'react'
 import { Form } from 'react-bootstrap'
 
 function TextField ({
-  description: { label, note, process },
+  description: { label, note, process = e => e, ref },
   value,
   updateValue
 }) {
@@ -10,13 +10,7 @@ function TextField ({
     updateValue(process(e.target.value))
   }
 
-  return (
-    <Form.Group>
-      {label && <Form.Label>{label}</Form.Label>}
-      <Form.Control value={value} onChange={updateMe} />
-      {note && <Form.Text>{note}</Form.Text>}
-    </Form.Group>
-  )
+  return <Form.Control value={value} onChange={updateMe} ref={ref} />
 }
 
 export default TextField

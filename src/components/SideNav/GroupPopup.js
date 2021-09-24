@@ -1,12 +1,24 @@
 import React, { useRef, useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
+import AutoForm from '../AutoForm'
+
+const formDescription = {
+  name: {
+    type: 'text'
+  }
+}
+
+const defaultData = {
+  name: ''
+}
 
 function GroupPopup ({ shown, hide, save }) {
-  const [name, setName] = useState('')
+  const [data, setData] = useState(defaultData)
   const ref = useRef()
+  formDescription.name.ref = ref
 
   const submit = () => {
-    save(name)
+    save(data.name)
     hide()
   }
 
@@ -18,28 +30,25 @@ function GroupPopup ({ shown, hide, save }) {
   return (
     <Modal
       show={shown}
-      onExited={() => setName('')}
+      onExited={() => setData(defaultData)}
       onShow={() => ref.current.focus()}
     >
       <Modal.Header closeButton onHide={hide}>
         <Modal.Title>Add new group</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={formSubmit}>
-          <Form.Group className='mb-3'>
-            <Form.Control
-              ref={ref}
-              value={name}
-              onChange={e => setName(e.target.value)}
-            />
-          </Form.Group>
-        </Form>
+        <AutoForm
+          description={formDescription}
+          data={data}
+          setData={setData}
+          submit={formSubmit}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button variant='secondary' onClick={hide}>
           Close
         </Button>
-        <Button variant='primary' onClick={() => submit(name)}>
+        <Button variant='primary' onClick={submit}>
           Save changes
         </Button>
       </Modal.Footer>

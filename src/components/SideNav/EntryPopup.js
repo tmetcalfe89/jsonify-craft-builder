@@ -1,14 +1,31 @@
 import React, { useRef, useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
+import AutoForm from '../AutoForm'
 
-function EntryPopup ({ shown, hide, save, types = ['item', 'block'] }) {
-  const [name, setName] = useState('')
-  const [type, setType] = useState('invalid')
+const formDescription = {
+  name: {
+    type: 'text'
+  },
+  type: {
+    type: 'select',
+    internalLabel: 'Types',
+    options: ['item', 'block']
+  }
+}
+
+const defaultData = {
+  name: '',
+  type: 'invalid'
+}
+
+function EntryPopup ({ shown, hide, save }) {
+  const [data, setData] = useState(defaultData)
   const ref = useRef()
+  formDescription.name.ref = ref
 
   const submit = () => {
-    if (type === 'invalid') return
-    save(name, type)
+    if (data.type === 'invalid') return
+    save(data.name, data.type)
     hide()
   }
 
@@ -18,8 +35,7 @@ function EntryPopup ({ shown, hide, save, types = ['item', 'block'] }) {
   }
 
   const resetForm = () => {
-    setName('')
-    setType('invalid')
+    setData(defaultData)
   }
 
   return (
@@ -28,31 +44,18 @@ function EntryPopup ({ shown, hide, save, types = ['item', 'block'] }) {
         <Modal.Title>Add new item</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={formSubmit}>
-          <Form.Group className='mb-3'>
-            <Form.Control
-              ref={ref}
-              value={name}
-              onChange={e => setName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Select value={type} onChange={e => setType(e.target.value)}>
-              <option value='invalid'>Type</option>
-              {types.map((type, ti) => (
-                <option value={type} key={`type-option-${ti}`}>
-                  {type}
-                </option>
-              ))}
-            </Form.Select>
-          </Form.Group>
-        </Form>
+        <AutoForm
+          description={formDescription}
+          data={data}
+          setData={setData}
+          submit={formSubmit}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button variant='secondary' onClick={hide}>
           Close
         </Button>
-        <Button variant='primary' onClick={() => submit(name)}>
+        <Button variant='primary' onClick={submit}>
           Save changes
         </Button>
       </Modal.Footer>
