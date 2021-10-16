@@ -1,31 +1,31 @@
-import React, { useRef, useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
-import AutoForm from '../AutoForm'
+import React, { useRef, useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import AutoForm from "../AutoForm";
 
 const formDescription = {
   name: {
-    type: 'text'
-  }
-}
+    type: "text",
+  },
+};
 
 const defaultData = {
-  name: ''
-}
+  name: "",
+};
 
-function GroupPopup ({ shown, hide, save }) {
-  const [data, setData] = useState(defaultData)
-  const ref = useRef()
-  formDescription.name.ref = ref
+function GroupPopup({ shown, hide, save }) {
+  const [data, setData] = useState(defaultData);
+  const ref = useRef();
+  formDescription.name.ref = ref;
 
   const submit = () => {
-    save(data.name)
-    hide()
-  }
+    save(data.name);
+    hide();
+  };
 
-  const formSubmit = e => {
-    e.preventDefault()
-    submit()
-  }
+  const formSubmit = (e) => {
+    e.preventDefault();
+    submit();
+  };
 
   return (
     <Modal
@@ -45,15 +45,15 @@ function GroupPopup ({ shown, hide, save }) {
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant='secondary' onClick={hide}>
+        <Button variant="secondary" onClick={hide}>
           Close
         </Button>
-        <Button variant='primary' onClick={submit}>
+        <Button variant="primary" onClick={submit}>
           Save changes
         </Button>
       </Modal.Footer>
     </Modal>
-  )
+  );
 }
 
-export default GroupPopup
+export default GroupPopup;

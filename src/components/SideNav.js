@@ -1,40 +1,40 @@
-import React, { useState } from 'react'
-import { ListGroup, Row, Col, Button } from 'react-bootstrap'
-import { PlusCircleFill } from 'react-bootstrap-icons'
-import GroupPopup from './SideNav/GroupPopup'
-import EntryPopup from './SideNav/EntryPopup'
-import GroupLine from './SideNav/GroupLine'
+import React, { useState } from "react";
+import { ListGroup, Row, Col, Button } from "react-bootstrap";
+import { PlusCircleFill } from "react-bootstrap-icons";
+import GroupPopup from "./SideNav/GroupPopup";
+import EntryPopup from "./SideNav/EntryPopup";
+import GroupLine from "./SideNav/GroupLine";
 
-function SideNav ({
+function SideNav({
   groups,
   updateActiveGroup,
   updateActiveItem,
   createGroup,
   createItem,
   deleteItem,
-  deleteGroup
+  deleteGroup,
 }) {
   const updateActiveItemIndex = (g, i) => {
-    updateActiveGroup(g)
-    updateActiveItem(i)
-  }
+    updateActiveGroup(g);
+    updateActiveItem(i);
+  };
 
-  const [displayGroupPopup, setDisplayGroupPopup] = useState(false)
-  const showGroupPopup = () => setDisplayGroupPopup(true)
-  const hideGroupPopup = () => setDisplayGroupPopup(false)
+  const [displayGroupPopup, setDisplayGroupPopup] = useState(false);
+  const showGroupPopup = () => setDisplayGroupPopup(true);
+  const hideGroupPopup = () => setDisplayGroupPopup(false);
 
-  const [displayEntryPopup, setDisplayEntryPopup] = useState(false)
-  const showEntryPopup = () => setDisplayEntryPopup(true)
-  const hideEntryPopup = () => setDisplayEntryPopup(false)
+  const [displayEntryPopup, setDisplayEntryPopup] = useState(false);
+  const showEntryPopup = () => setDisplayEntryPopup(true);
+  const hideEntryPopup = () => setDisplayEntryPopup(false);
 
-  const [addingGroup, setAddingGroup] = useState(0)
+  const [addingGroup, setAddingGroup] = useState(0);
   const addItem = (name, type) => {
-    createItem(addingGroup, name, type)
-  }
+    createItem(addingGroup, name, type);
+  };
 
   const deleteEntry = (g, i) => {
-    deleteItem(g, i)
-  }
+    deleteItem(g, i);
+  };
 
   return (
     <>
@@ -43,9 +43,9 @@ function SideNav ({
           <h1>Groups</h1>
         </Col>
       </Row>
-      <Row style={{ overflowY: 'auto', flexShrink: '1', flexGrow: '1' }}>
+      <Row style={{ overflowY: "auto", flexShrink: "1", flexGrow: "1" }}>
         <Col>
-          <ListGroup variant='flush'>
+          <ListGroup variant="flush">
             {groups.map((group, g) => (
               <GroupLine
                 key={`sidenav-group-${g}`}
@@ -61,9 +61,9 @@ function SideNav ({
           </ListGroup>
         </Col>
       </Row>
-      <Row style={{ paddingBottom: '0.5rem' }}>
-        <Col className='d-grid gap-2'>
-          <Button variant='primary' onClick={showGroupPopup}>
+      <Row style={{ paddingBottom: "0.5rem" }}>
+        <Col className="d-grid gap-2">
+          <Button variant="primary" onClick={showGroupPopup}>
             <PlusCircleFill />
           </Button>
         </Col>
@@ -79,7 +79,7 @@ function SideNav ({
         save={addItem}
       />
     </>
-  )
+  );
 }
 
-export default SideNav
+export default SideNav;

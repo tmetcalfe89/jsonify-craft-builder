@@ -1,51 +1,49 @@
-import React, { useState } from 'react'
-import { ListGroup, Button } from 'react-bootstrap'
+import React, { useState } from "react";
+import { ListGroup, Button } from "react-bootstrap";
 import {
   CaretDownFill,
   CaretRightFill,
-  PlusCircle
-} from 'react-bootstrap-icons'
-import DeleteButton from './DeleteButton'
-import EntryLine from './EntryLine'
+  PlusCircle,
+} from "react-bootstrap-icons";
+import DeleteButton from "./DeleteButton";
+import EntryLine from "./EntryLine";
 
-function GroupLine ({
+function GroupLine({
   g,
   group,
   deleteGroup,
   deleteEntry,
   updateActiveItemIndex,
   setAddingGroup,
-  showEntryPopup
+  showEntryPopup,
 }) {
-  const [showEntries, setShowEntries] = useState(false)
+  const [showEntries, setShowEntries] = useState(false);
 
-  const deleteMe = e => {
-    e.stopPropagation()
-    deleteGroup(g)
-  }
+  const deleteMe = (e) => {
+    e.stopPropagation();
+    deleteGroup(g);
+  };
 
   return (
     <>
       <ListGroup.Item
         action
-        as='div'
-        variant={showEntries ? 'dark' : ''}
+        as="div"
+        variant={showEntries ? "dark" : ""}
         onClick={() => setShowEntries(!showEntries)}
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        {showEntries
-          ? (
-            <CaretDownFill style={{ marginRight: '0.6rem' }} />
-            )
-          : (
-            <CaretRightFill style={{ marginRight: '0.6rem' }} />
-            )}
+        {showEntries ? (
+          <CaretDownFill style={{ marginRight: "0.6rem" }} />
+        ) : (
+          <CaretRightFill style={{ marginRight: "0.6rem" }} />
+        )}
         {group.name}
-        <DeleteButton variant='secondary' onClick={deleteMe} />
+        <DeleteButton variant="secondary" onClick={deleteMe} />
       </ListGroup.Item>
       {showEntries &&
         group.items.map((item, i) => (
@@ -61,20 +59,20 @@ function GroupLine ({
       {showEntries && (
         <ListGroup.Item
           action
-          className='d-grid gap-2'
-          as='div'
+          className="d-grid gap-2"
+          as="div"
           onClick={() => {
-            setAddingGroup(g)
-            showEntryPopup()
+            setAddingGroup(g);
+            showEntryPopup();
           }}
         >
-          <Button variant='secondary'>
+          <Button variant="secondary">
             <PlusCircle />
           </Button>
         </ListGroup.Item>
       )}
     </>
-  )
+  );
 }
 
-export default GroupLine
+export default GroupLine;

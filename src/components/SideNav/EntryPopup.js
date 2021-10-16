@@ -1,42 +1,42 @@
-import React, { useRef, useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
-import AutoForm from '../AutoForm'
+import React, { useRef, useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import AutoForm from "../AutoForm";
 
 const formDescription = {
   name: {
-    type: 'text'
+    type: "text",
   },
   type: {
-    type: 'select',
-    internalLabel: 'Types',
-    options: ['item', 'block']
-  }
-}
+    type: "select",
+    internalLabel: "Types",
+    options: ["item", "block"],
+  },
+};
 
 const defaultData = {
-  name: '',
-  type: 'invalid'
-}
+  name: "",
+  type: "invalid",
+};
 
-function EntryPopup ({ shown, hide, save }) {
-  const [data, setData] = useState(defaultData)
-  const ref = useRef()
-  formDescription.name.ref = ref
+function EntryPopup({ shown, hide, save }) {
+  const [data, setData] = useState(defaultData);
+  const ref = useRef();
+  formDescription.name.ref = ref;
 
   const submit = () => {
-    if (data.type === 'invalid') return
-    save(data.name, data.type)
-    hide()
-  }
+    if (data.type === "invalid") return;
+    save(data.name, data.type);
+    hide();
+  };
 
   const formSubmit = (e) => {
-    e.preventDefault()
-    submit()
-  }
+    e.preventDefault();
+    submit();
+  };
 
   const resetForm = () => {
-    setData(defaultData)
-  }
+    setData(defaultData);
+  };
 
   return (
     <Modal show={shown} onExited={resetForm} onShow={() => ref.current.focus()}>
@@ -52,15 +52,15 @@ function EntryPopup ({ shown, hide, save }) {
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant='secondary' onClick={hide}>
+        <Button variant="secondary" onClick={hide}>
           Close
         </Button>
-        <Button variant='primary' onClick={submit}>
+        <Button variant="primary" onClick={submit}>
           Save changes
         </Button>
       </Modal.Footer>
     </Modal>
-  )
+  );
 }
 
-export default EntryPopup
+export default EntryPopup;

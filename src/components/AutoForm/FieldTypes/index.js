@@ -1,9 +1,9 @@
-import TextField from './TextField'
-import SelectField from './SelectField'
+import TextField from "./TextField";
+import SelectField from "./SelectField";
 
 const fieldTypes = {
   text: TextField,
-  select: SelectField
-}
+  select: SelectField,
+};
 
-export default fieldTypes
+export default fieldTypes;
