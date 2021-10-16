@@ -3,9 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import SideNav from "./components/SideNav";
 import EntryDesigner from "./components/EntryDesigner";
 import ConfirmPopup from "./components/ConfirmPopup";
+import { useLocalStorage } from "react-use";
 
 function App() {
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useLocalStorage("groups", []);
   const [activeGroupIndex, setActiveGroupIndex] = useState(0);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
