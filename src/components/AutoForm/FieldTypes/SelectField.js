@@ -14,13 +14,15 @@ function SelectField ({
     <Form.Select value={value} onChange={updateMe} ref={ref}>
       {internalLabel && <option value='invalid'>{internalLabel}</option>}
       {options.map(option =>
-        typeof option === 'string' ? (
-          <option key={`option-${option}`}>{option}</option>
-        ) : (
-          <option value={option.value} key={`option-${option.value}`}>
-            {option.label}
-          </option>
-        )
+        typeof option === 'string'
+          ? (
+            <option key={`option-${option}`}>{option}</option>
+            )
+          : (
+            <option value={option.value} key={`option-${option.value}`}>
+              {option.label}
+            </option>
+            )
       )}
     </Form.Select>
   )

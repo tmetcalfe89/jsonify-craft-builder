@@ -37,11 +37,13 @@ function GroupLine ({
           justifyContent: 'space-between'
         }}
       >
-        {showEntries ? (
-          <CaretDownFill style={{ marginRight: '0.6rem' }} />
-        ) : (
-          <CaretRightFill style={{ marginRight: '0.6rem' }} />
-        )}
+        {showEntries
+          ? (
+            <CaretDownFill style={{ marginRight: '0.6rem' }} />
+            )
+          : (
+            <CaretRightFill style={{ marginRight: '0.6rem' }} />
+            )}
         {group.name}
         <DeleteButton variant='secondary' onClick={deleteMe} />
       </ListGroup.Item>

@@ -29,7 +29,7 @@ function EntryPopup ({ shown, hide, save }) {
     hide()
   }
 
-  const formSubmit = e => {
+  const formSubmit = (e) => {
     e.preventDefault()
     submit()
   }
