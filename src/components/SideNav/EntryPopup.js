@@ -41,7 +41,7 @@ function EntryPopup ({ shown, hide, save }) {
   return (
     <Modal show={shown} onExited={resetForm} onShow={() => ref.current.focus()}>
       <Modal.Header closeButton onHide={hide}>
-        <Modal.Title>Add new item</Modal.Title>
+        <Modal.Title>Add new entry</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <AutoForm
