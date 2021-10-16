@@ -1,7 +1,8 @@
 const path = require("path");
 
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron");
 const isDev = require("electron-is-dev");
+const applicationMenu = require("./applicationMenu");
 
 let installExtension, REACT_DEVELOPER_TOOLS;
 
@@ -43,6 +44,7 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  Menu.setApplicationMenu(applicationMenu);
   createWindow();
 
   if (isDev) {
