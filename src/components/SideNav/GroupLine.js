@@ -40,6 +40,11 @@ function GroupLine({
     renameGroup(g, name);
   };
 
+  const showOptions = (e) => {
+    e.stopPropagation();
+    showOptionPopup();
+  };
+
   const exportGroup = async () => {
     var zip = new JSZip();
     group.items.forEach((item) =>
@@ -71,7 +76,7 @@ function GroupLine({
         {group.name}
         {/* <DeleteButton variant="secondary" onClick={deleteMe} /> */}
         <span style={{ visibility: groupLineHovered ? "" : "hidden" }}>
-          <Button variant="secondary" onClick={showOptionPopup}>
+          <Button variant="secondary" onClick={showOptions}>
             <ThreeDots />
           </Button>
         </span>
