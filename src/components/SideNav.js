@@ -13,6 +13,7 @@ function SideNav({
   createItem,
   deleteItem,
   deleteGroup,
+  renameGroup,
 }) {
   const updateActiveItemIndex = (g, i) => {
     updateActiveGroup(g);
@@ -52,6 +53,7 @@ function SideNav({
                 g={g}
                 group={group}
                 deleteGroup={deleteGroup}
+                renameGroup={renameGroup}
                 updateActiveItemIndex={updateActiveItemIndex}
                 deleteEntry={deleteEntry}
                 setAddingGroup={setAddingGroup}

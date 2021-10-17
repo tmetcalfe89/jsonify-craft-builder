@@ -16,6 +16,7 @@ function GroupLine({
   g,
   group,
   deleteGroup,
+  renameGroup,
   deleteEntry,
   updateActiveItemIndex,
   setAddingGroup,
@@ -33,6 +34,10 @@ function GroupLine({
   const deleteMe = (e) => {
     e.stopPropagation();
     deleteGroup(g);
+  };
+
+  const renameMe = (name) => {
+    renameGroup(g, name);
   };
 
   const exportGroup = async () => {
@@ -101,6 +106,7 @@ function GroupLine({
         shown={displayOptionPopup}
         hide={hideOptionPopup}
         deleteMe={deleteMe}
+        renameMe={renameMe}
         exportGroup={exportGroup}
       />
     </>

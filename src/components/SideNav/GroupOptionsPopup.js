@@ -1,12 +1,27 @@
-import React from "react";
-import { Modal, ListGroup, ListGroupItem } from "react-bootstrap";
-import { useCss } from "react-use";
+import Button from "@restart/ui/esm/Button";
+import React, { useRef } from "react";
+import {
+  Modal,
+  ListGroup,
+  ListGroupItem,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
+import { useCss, useToggle } from "react-use";
 
-function GroupOptionsPopup({ shown, hide, deleteMe, exportGroup }) {
+function GroupOptionsPopup({ shown, hide, deleteMe, renameMe, exportGroup }) {
   const listGroupItemStyle = useCss({
     textAlign: "center",
     "&:hover": { fontWeight: "bold" },
   });
+  const [showRenamer, toggleShowRenamer] = useToggle(false);
+  const renameRef = useRef(null);
+
+  const rename = () => {
+    renameMe(renameRef.current.value);
+    toggleShowRenamer(false);
+    hide();
+  };
 
   return (
     <Modal show={shown}>
@@ -23,6 +38,24 @@ function GroupOptionsPopup({ shown, hide, deleteMe, exportGroup }) {
           >
             Export
           </ListGroupItem>
+          {!showRenamer ? (
+            <ListGroupItem
+              action
+              onClick={toggleShowRenamer}
+              className={listGroupItemStyle}
+            >
+              Rename
+            </ListGroupItem>
+          ) : (
+            <ListGroupItem>
+              <InputGroup>
+                <FormControl ref={renameRef} />
+                <Button variant="outline-secondary" onClick={rename}>
+                  Rename
+                </Button>
+              </InputGroup>
+            </ListGroupItem>
+          )}
           <ListGroupItem
             action
             onClick={deleteMe}
