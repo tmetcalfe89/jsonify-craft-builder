@@ -61,6 +61,12 @@ function App() {
     );
   };
 
+  const renameGroup = (g, name) => {
+    const clone = [...groups];
+    clone[g].name = name;
+    setGroups(clone);
+  };
+
   return (
     <>
       <Container fluid style={{ height: "100vh", overflowY: "hidden" }}>
@@ -81,6 +87,7 @@ function App() {
               createItem={createItem}
               deleteItem={deleteItem}
               deleteGroup={deleteGroup}
+              renameGroup={renameGroup}
             />
           </Col>
           <Col>
