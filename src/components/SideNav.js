@@ -4,6 +4,7 @@ import { PlusCircleFill } from "react-bootstrap-icons";
 import GroupPopup from "./SideNav/GroupPopup";
 import EntryPopup from "./SideNav/EntryPopup";
 import GroupLine from "./SideNav/GroupLine";
+import { sortKeyByLetter } from "../util/stringUtil";
 
 function SideNav({
   groups,
@@ -47,27 +48,19 @@ function SideNav({
       <Row style={{ overflowY: "auto", flexShrink: "1", flexGrow: "1" }}>
         <Col>
           <ListGroup variant="flush">
-            {groups
-              .sort((groupA, groupB) =>
-                groupA.name > groupB.name
-                  ? 1
-                  : groupA.name < groupB.name
-                  ? -1
-                  : 0
-              )
-              .map((group, g) => (
-                <GroupLine
-                  key={`sidenav-group-${g}`}
-                  g={g}
-                  group={group}
-                  deleteGroup={deleteGroup}
-                  renameGroup={renameGroup}
-                  updateActiveItemIndex={updateActiveItemIndex}
-                  deleteEntry={deleteEntry}
-                  setAddingGroup={setAddingGroup}
-                  showEntryPopup={showEntryPopup}
-                />
-              ))}
+            {groups.sort(sortKeyByLetter.bind(null, "name")).map((group, g) => (
+              <GroupLine
+                key={`sidenav-group-${g}`}
+                g={g}
+                group={group}
+                deleteGroup={deleteGroup}
+                renameGroup={renameGroup}
+                updateActiveItemIndex={updateActiveItemIndex}
+                deleteEntry={deleteEntry}
+                setAddingGroup={setAddingGroup}
+                showEntryPopup={showEntryPopup}
+              />
+            ))}
           </ListGroup>
         </Col>
       </Row>

@@ -7,4 +7,7 @@ const toSnakeCase = (value) =>
         .replace(/__/g, "_")
     : "";
 
-export { toSnakeCase };
+const sortKeyByLetter = (key, a, b) =>
+  a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0;
+
+export { toSnakeCase, sortKeyByLetter };
