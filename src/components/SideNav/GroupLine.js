@@ -1,3 +1,4 @@
+import JSZip from "jszip";
 import React, { useRef, useState } from "react";
 import { ListGroup, Button } from "react-bootstrap";
 import {
@@ -9,6 +10,7 @@ import {
 import { useHoverDirty } from "react-use";
 import EntryLine from "./EntryLine";
 import GroupOptionsPopup from "./GroupOptionsPopup";
+import { saveAs } from "file-saver";
 
 function GroupLine({
   g,
@@ -31,6 +33,15 @@ function GroupLine({
   const deleteMe = (e) => {
     e.stopPropagation();
     deleteGroup(g);
+  };
+
+  const exportGroup = async () => {
+    var zip = new JSZip();
+    group.items.forEach((item) =>
+      zip.file(`${item.name}.json`, JSON.stringify(item))
+    );
+    const zipFile = await zip.generateAsync({ type: "blob" });
+    saveAs(zipFile, group.name);
   };
 
   return (
@@ -90,6 +101,7 @@ function GroupLine({
         shown={displayOptionPopup}
         hide={hideOptionPopup}
         deleteMe={deleteMe}
+        exportGroup={exportGroup}
         exportGroup={() => {}}
       />
     </>
