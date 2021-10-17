@@ -7,8 +7,8 @@ import {
   ThreeDots,
 } from "react-bootstrap-icons";
 import { useHoverDirty } from "react-use";
-import DeleteButton from "./DeleteButton";
 import EntryLine from "./EntryLine";
+import GroupOptionsPopup from "./GroupOptionsPopup";
 
 function GroupLine({
   g,
@@ -20,8 +20,13 @@ function GroupLine({
   showEntryPopup,
 }) {
   const [showEntries, setShowEntries] = useState(false);
+
   const groupLineRef = useRef(null);
   const groupLineHovered = useHoverDirty(groupLineRef);
+
+  const [displayOptionPopup, setDisplayOptionPopup] = useState(false);
+  const showOptionPopup = () => setDisplayOptionPopup(true);
+  const hideOptionPopup = () => setDisplayOptionPopup(false);
 
   const deleteMe = (e) => {
     e.stopPropagation();
@@ -50,7 +55,7 @@ function GroupLine({
         {group.name}
         {/* <DeleteButton variant="secondary" onClick={deleteMe} /> */}
         <span style={{ visibility: groupLineHovered ? "" : "hidden" }}>
-          <Button variant="secondary" onClick={() => {}}>
+          <Button variant="secondary" onClick={showOptionPopup}>
             <ThreeDots />
           </Button>
         </span>
@@ -81,6 +86,12 @@ function GroupLine({
           </Button>
         </ListGroup.Item>
       )}
+      <GroupOptionsPopup
+        shown={displayOptionPopup}
+        hide={hideOptionPopup}
+        deleteMe={deleteMe}
+        exportGroup={() => {}}
+      />
     </>
   );
 }
