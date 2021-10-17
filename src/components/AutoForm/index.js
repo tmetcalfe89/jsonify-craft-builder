@@ -21,7 +21,10 @@ function AutoForm({
         const FieldElement = FieldTypes[fieldDescription.type];
         const { label, note } = fieldDescription;
         return (
-          <Form.Group className={i === arr.length - 1 ? null : "mb-3"}>
+          <Form.Group
+            className={i === arr.length - 1 ? null : "mb-3"}
+            key={`form-group-${id}`}
+          >
             {label && <Form.Label>{label}</Form.Label>}
             <FieldElement
               description={fieldDescription}
