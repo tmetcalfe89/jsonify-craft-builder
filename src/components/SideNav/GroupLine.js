@@ -102,7 +102,6 @@ function GroupLine({
         hide={hideOptionPopup}
         deleteMe={deleteMe}
         exportGroup={exportGroup}
-        exportGroup={() => {}}
       />
     </>
   );
