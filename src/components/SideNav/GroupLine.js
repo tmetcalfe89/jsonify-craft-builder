@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import JSZip from "jszip";
+import React, { useRef, useState } from "react";
 import { ListGroup, Button } from "react-bootstrap";
 import {
   CaretDownFill,
   CaretRightFill,
   PlusCircle,
+  ThreeDots,
 } from "react-bootstrap-icons";
-import DeleteButton from "./DeleteButton";
+import { useHoverDirty } from "react-use";
 import EntryLine from "./EntryLine";
+import GroupOptionsPopup from "./GroupOptionsPopup";
+import { saveAs } from "file-saver";
 
 function GroupLine({
   g,
@@ -19,9 +23,25 @@ function GroupLine({
 }) {
   const [showEntries, setShowEntries] = useState(false);
 
+  const groupLineRef = useRef(null);
+  const groupLineHovered = useHoverDirty(groupLineRef);
+
+  const [displayOptionPopup, setDisplayOptionPopup] = useState(false);
+  const showOptionPopup = () => setDisplayOptionPopup(true);
+  const hideOptionPopup = () => setDisplayOptionPopup(false);
+
   const deleteMe = (e) => {
     e.stopPropagation();
     deleteGroup(g);
+  };
+
+  const exportGroup = async () => {
+    var zip = new JSZip();
+    group.items.forEach((item) =>
+      zip.file(`${item.name}.json`, JSON.stringify(item))
+    );
+    const zipFile = await zip.generateAsync({ type: "blob" });
+    saveAs(zipFile, group.name);
   };
 
   return (
@@ -36,6 +56,7 @@ function GroupLine({
           alignItems: "center",
           justifyContent: "space-between",
         }}
+        ref={groupLineRef}
       >
         {showEntries ? (
           <CaretDownFill style={{ marginRight: "0.6rem" }} />
@@ -43,7 +64,12 @@ function GroupLine({
           <CaretRightFill style={{ marginRight: "0.6rem" }} />
         )}
         {group.name}
-        <DeleteButton variant="secondary" onClick={deleteMe} />
+        {/* <DeleteButton variant="secondary" onClick={deleteMe} /> */}
+        <span style={{ visibility: groupLineHovered ? "" : "hidden" }}>
+          <Button variant="secondary" onClick={showOptionPopup}>
+            <ThreeDots />
+          </Button>
+        </span>
       </ListGroup.Item>
       {showEntries &&
         group.items.map((item, i) => (
@@ -71,6 +97,13 @@ function GroupLine({
           </Button>
         </ListGroup.Item>
       )}
+      <GroupOptionsPopup
+        shown={displayOptionPopup}
+        hide={hideOptionPopup}
+        deleteMe={deleteMe}
+        exportGroup={exportGroup}
+        exportGroup={() => {}}
+      />
     </>
   );
 }
