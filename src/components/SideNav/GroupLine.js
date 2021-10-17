@@ -20,8 +20,8 @@ function GroupLine({
   showEntryPopup,
 }) {
   const [showEntries, setShowEntries] = useState(false);
-  const daRef = useRef(null);
-  const daRefHovered = useHoverDirty(daRef);
+  const groupLineRef = useRef(null);
+  const groupLineHovered = useHoverDirty(groupLineRef);
 
   const deleteMe = (e) => {
     e.stopPropagation();
@@ -40,7 +40,7 @@ function GroupLine({
           alignItems: "center",
           justifyContent: "space-between",
         }}
-        ref={daRef}
+        ref={groupLineRef}
       >
         {showEntries ? (
           <CaretDownFill style={{ marginRight: "0.6rem" }} />
@@ -49,7 +49,7 @@ function GroupLine({
         )}
         {group.name}
         {/* <DeleteButton variant="secondary" onClick={deleteMe} /> */}
-        <span style={{ visibility: daRefHovered ? "" : "hidden" }}>
+        <span style={{ visibility: groupLineHovered ? "" : "hidden" }}>
           <Button variant="secondary" onClick={() => {}}>
             <ThreeDots />
           </Button>
