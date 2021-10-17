@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ListGroup, Button } from "react-bootstrap";
 import {
   CaretDownFill,
   CaretRightFill,
   PlusCircle,
+  ThreeDots,
 } from "react-bootstrap-icons";
+import { useHoverDirty } from "react-use";
 import DeleteButton from "./DeleteButton";
 import EntryLine from "./EntryLine";
 
@@ -18,6 +20,8 @@ function GroupLine({
   showEntryPopup,
 }) {
   const [showEntries, setShowEntries] = useState(false);
+  const daRef = useRef(null);
+  const daRefHovered = useHoverDirty(daRef);
 
   const deleteMe = (e) => {
     e.stopPropagation();
@@ -36,6 +40,7 @@ function GroupLine({
           alignItems: "center",
           justifyContent: "space-between",
         }}
+        ref={daRef}
       >
         {showEntries ? (
           <CaretDownFill style={{ marginRight: "0.6rem" }} />
@@ -43,7 +48,12 @@ function GroupLine({
           <CaretRightFill style={{ marginRight: "0.6rem" }} />
         )}
         {group.name}
-        <DeleteButton variant="secondary" onClick={deleteMe} />
+        {/* <DeleteButton variant="secondary" onClick={deleteMe} /> */}
+        <span style={{ visibility: daRefHovered ? "" : "hidden" }}>
+          <Button variant="secondary" onClick={() => {}}>
+            <ThreeDots />
+          </Button>
+        </span>
       </ListGroup.Item>
       {showEntries &&
         group.items.map((item, i) => (
