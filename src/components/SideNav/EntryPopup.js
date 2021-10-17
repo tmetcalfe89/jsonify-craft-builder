@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { toSnakeCase } from "../../util/stringUtil";
 import AutoForm from "../AutoForm";
 
 const formDescription = {
   name: {
     type: "text",
+    process: toSnakeCase,
   },
   type: {
     type: "select",
