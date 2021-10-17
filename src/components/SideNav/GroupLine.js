@@ -74,7 +74,6 @@ function GroupLine({
           <CaretRightFill style={{ marginRight: "0.6rem" }} />
         )}
         {group.name}
-        {/* <DeleteButton variant="secondary" onClick={deleteMe} /> */}
         <span style={{ visibility: groupLineHovered ? "" : "hidden" }}>
           <Button variant="secondary" onClick={showOptions}>
             <ThreeDots />
